@@ -25,4 +25,4 @@ RUN apt-get -y install cmake && export CMAKE_LIBRARY_PATH=/opt/intel/oneapi/mkl/
 
 RUN mkdir -p ${HOME}/Downloads/transformers && cd ${HOME}/Downloads/transformers && wget https://github.com/huggingface/transformers/archive/refs/tags/v4.38.2.tar.gz && tar xf v4.38.2.tar.gz && cd transformers-4.38.2 && python3 setup.py install
 
-RUN mkdir -p ${HOME}/Downloads/ipex && cd ${HOME}/Downloads/ipex && wget  https://github.com/intel/intel-extension-for-pytorch/archive/refs/tags/v2.2.0+cpu.tar.gz && tar xf v2.2.0+cpu.tar.gz && cd && pip3 install -r requirements.txt && python3 setup.py install
+RUN ln -s /usr/local/bin/python3 /usr/local/bin/python && mkdir -p ${HOME}/Downloads/ipex && cd ${HOME}/Downloads/ipex && git clone https://github.com/intel/intel-extension-for-pytorch.git && cd intel-extension-for-pytorch && git checkout tags/v2.2.0+cpu && git submodule update --init --recursive && pip3 install -r requirements.txt && python3 setup.py install
